@@ -19,20 +19,24 @@ def encode_file_to_base64(input_path: str, output_path: str, add_pem_headers: bo
         print(f"Error: File '{input_path}' does not exist.", file=sys.stderr)
         sys.exit(1)
 
-    with open(input_path, "rb") as infile:
-        encoded_bytes = base64.b64encode(infile.read())
+    # with open(input_path, "rb") as infile:
+    #     encoded_bytes = base64.b64encode(infile.read())
 
-    if add_pem_headers:
-        pem_content = (
-            "-----BEGIN CERTIFICATE-----\n" +
-            encoded_bytes.decode('ascii') +
-            "\n-----END CERTIFICATE-----\n"
-        )
-        with open(output_path, "w", encoding="ascii") as outfile:
-            outfile.write(pem_content)
-    else:
-        with open(output_path, "wb") as outfile:
-            outfile.write(encoded_bytes)
+    # if add_pem_headers:
+    #     pem_content = (
+    #         "-----BEGIN CERTIFICATE-----\n" +
+    #         encoded_bytes.decode('ascii') +
+    #         "\n-----END CERTIFICATE-----\n"
+    #     )
+    #     with open(output_path, "w", encoding="ascii") as outfile:
+    #         outfile.write(pem_content)
+    # else:
+    #     with open(output_path, "wb") as outfile:
+    #         outfile.write(encoded_bytes)
+    
+    
+    with open(input_path, "rb") as fin, open(output_path, "wb") as fout:
+        base64.encode(fin, fout)
 
     print(f"Base64 encoded file saved to: {output_path}")
 
