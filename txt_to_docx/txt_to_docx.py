@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-import argparse
+
 import tempfile
 from docx import Document
 import gc
@@ -98,13 +98,3 @@ def convert_large_txt(txt_path, output_name, max_files_per_dir=40):
             print(f"All chunks converted. DOCX files are in subfolders of {output_name}/")
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Convert TXT to DOCX (split 15MB each if needed)")
-    parser.add_argument("txt_file", help="Input TXT file path")
-    parser.add_argument("--output-name", required=True, help="Output file name (for small files) or directory name (for large files)")
-    args = parser.parse_args()
-
-    convert_large_txt(args.txt_file, args.output_name)
-
-if __name__ == "__main__":
-    main()

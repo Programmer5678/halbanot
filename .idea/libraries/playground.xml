@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="playground">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/playground/file.txt.zip!/" />
+      <root url="jar://$PROJECT_DIR$/playground/s_file.txt.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

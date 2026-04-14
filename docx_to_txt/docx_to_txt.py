@@ -56,12 +56,4 @@ def process_nested_path(input_path, output_path):
         docx_to_txt(input_path, output_path)
         print(f"Appended {input_path} to {output_path}")
 
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python docx_to_txt.py input.docx_or_dir output.txt")
-        sys.exit(1)
 
-    inp = sys.argv[1]
-    out = sys.argv[2]   
-
-    process_nested_path(inp, out)
