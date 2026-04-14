@@ -1,7 +1,7 @@
-from zip import zip
-from base64encode.base64encode import encode_file_to_base64
-from txt_to_docx.txt_to_docx import txt_to_docxs
-from input_validate import validate_parent_dir, validate_is_file,validate_abs_path
+from .zip import zip
+from .base64encode.base64encode import encode_file_to_base64
+from .txt_to_docx.txt_to_docx import txt_to_docxs
+from .input_validate import validate_parent_dir, validate_is_file,validate_abs_path
 
 def validate_input(input_path, output_path):
      validate_abs_path(input_path)
@@ -26,6 +26,6 @@ def encode(input_path: str, output_path: str):
 
 
 
-encode("/home/ruz/coding/backend-stuff/halbanot/playground/file.txt",
-       "/home/ruz/coding/backend-stuff/halbanot/playground/s_file.txt.zip.b64"
-       )
+# encode("/home/ruz/coding/backend-stuff/halbanot/playground/file.txt",
+#        "/home/ruz/coding/backend-stuff/halbanot/playground/s_file.txt.zip.b64"
+#        )

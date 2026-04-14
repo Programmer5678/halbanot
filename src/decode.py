@@ -1,7 +1,7 @@
-from zip import unzip
-from base64decode.base64decode import decode_file_from_base64
-from docx_to_txt.docx_to_txt import docxs_to_txt
-from input_validate import validate_parent_dir, validate_exists,validate_abs_path
+from .zip import unzip
+from .base64decode.base64decode import decode_file_from_base64
+from .docx_to_txt.docx_to_txt import docxs_to_txt
+from .input_validate import validate_parent_dir, validate_exists,validate_abs_path
 
 def validate_input(input_path, output_path):
     validate_abs_path(input_path)
@@ -22,7 +22,7 @@ def decode(input_path: str, output_path: str):
 
     unzip(base64_decoded, output_path)
 
-
-decode("/home/ruz/coding/backend-stuff/halbanot/playground/s_file.txt.zip.b64.docx",
-       "/home/ruz/coding/backend-stuff/halbanot/playground/s")
+#
+# decode("/home/ruz/coding/backend-stuff/halbanot/playground/s_file.txt.zip.b64.docx",
+#        "/home/ruz/coding/backend-stuff/halbanot/playground/s")
 
