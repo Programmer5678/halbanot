@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <form id="halbanot-form">
@@ -22,33 +23,6 @@
 
     </form>
 
-    <script>
-        const API_BASE_URL = "http://127.0.0.1:8000";
-
-        async function myHandler(e) {
-            e.preventDefault();
-
-            const data = new FormData(e.target);
-
-            const response = await fetch(`${API_BASE_URL}/main/encode`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    input_path: data.get("input_path"),
-                    output_path: data.get("output_path")
-                })
-            });
-
-            const result = await response.json();
-            console.log(result);
-        }
-
-        document
-            .getElementById("halbanot-form")
-            .addEventListener("submit", myHandler);
-    </script>
 </body>
 
 </html>
