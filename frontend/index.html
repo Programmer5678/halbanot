@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form id="halbanot-form">
+        <label>
+            Input file(full path)
+            <input name="input_path" placeholder="Example: /home/dir1/dir2/file.txt" />
+        </label>
+
+        <label>
+            Output file(full path)
+            <input name="output_path" placeholder="Example: /home/dir1/dir2/result_docxs" />
+        </label>
+
+        <button>
+            Submit
+        </button>
+
+    </form>
+
+    <script>
+        const API_BASE_URL = "http://127.0.0.1:8000";
+
+        async function myHandler(e) {
+            e.preventDefault();
+
+            const data = new FormData(e.target);
+
+            const response = await fetch(`${API_BASE_URL}/main/encode`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    input_path: data.get("input_path"),
+                    output_path: data.get("output_path")
+                })
+            });
+
+            const result = await response.json();
+            console.log(result);
+        }
+
+        document
+            .getElementById("halbanot-form")
+            .addEventListener("submit", myHandler);
+    </script>
+</body>
+
+</html>
