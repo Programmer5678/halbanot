@@ -1,4 +1,4 @@
-from docx_to_txt import process_nested_path
+from docx_to_txt import docxs_to_txt
 import sys
 
 if __name__ == "__main__":
@@ -9,4 +9,4 @@ if __name__ == "__main__":
     inp = sys.argv[1]
     out = sys.argv[2]
 
-    process_nested_path(inp, out)
+    docxs_to_txt(inp, out)

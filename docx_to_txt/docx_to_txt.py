@@ -21,7 +21,7 @@ def docx_to_txt(docx_path, txt_path):
             f.write(doc)
         
 
-def process_nested_path(input_path, output_path):
+def docxs_to_txt(input_path, output_path):
     """
     Convert DOCX files to a single TXT file. Handles nested directories:
     loops over subdirectories, then files inside each subdirectory.

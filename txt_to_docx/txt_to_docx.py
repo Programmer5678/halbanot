@@ -33,7 +33,7 @@ def split_txt_file(txt_path, tmp_dir):
             
             chunk_index += 1
 
-def txt_to_docx(txt_path, docx_path):
+def txt_to_docx_single_file(txt_path, docx_path):
     """Convert a single TXT file to DOCX (memory-safe, reads in buffers)."""
     doc = Document()
     paragraph = doc.add_paragraph()
@@ -45,10 +45,12 @@ def txt_to_docx(txt_path, docx_path):
             paragraph.add_run(data)
     doc.save(docx_path)
     print(f"Saved {docx_path}")
+
+    return docx_path
     
 # Memory leak mitigation: force garbage collection after each conversion
 def txt_to_docx_with_gc(txt_path, docx_path):
-    txt_to_docx(txt_path, docx_path)
+    txt_to_docx_single_file(txt_path, docx_path)
     gc.collect()
  
  
@@ -75,7 +77,7 @@ def convert_chunks_to_docx(chunk_files, output_base, max_files_per_dir=40):
         txt_to_docx_with_gc(chunk_file, docx_path)
 
 
-def convert_large_txt(txt_path, output_name, max_files_per_dir=40):
+def txt_to_docxs(txt_path, output_name, max_files_per_dir=40):
     """Convert TXT to DOCX. Split into multiple DOCX if >15MB,
     organizing DOCX files into directories with max_files_per_dir each."""
     
@@ -84,7 +86,7 @@ def convert_large_txt(txt_path, output_name, max_files_per_dir=40):
 
     if file_size <= MAX_SPLIT_SIZE:
         # Small file: single DOCX
-        txt_to_docx(txt_path, f"{output_name}.docx")
+        txt_to_docx_single_file(txt_path, f"{output_name}.docx")
     else:
         # Large file: split and convert
         os.makedirs(output_name, exist_ok=True)
