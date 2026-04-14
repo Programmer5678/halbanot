@@ -77,26 +77,38 @@ def convert_chunks_to_docx(chunk_files, output_base, max_files_per_dir=40):
         txt_to_docx_with_gc(chunk_file, docx_path)
 
 
-def txt_to_docxs(txt_path, output_name, max_files_per_dir=40):
+def to_docx_path(output_path):
+    return output_path if output_path.endswith(".docx") else f"{output_path}.docx"
+
+def txt_to_docxs(txt_path, output_path, max_files_per_dir=40):
     """Convert TXT to DOCX. Split into multiple DOCX if >15MB,
-    organizing DOCX files into directories with max_files_per_dir each."""
+    organizing DOCX files into directories with max_files_per_dir each.
+
+    Return full output path
+    """
     
     file_size = os.path.getsize(txt_path)
     print(f"Input TXT size: {file_size / (1024*1024):.2f} MB")
 
     if file_size <= MAX_SPLIT_SIZE:
         # Small file: single DOCX
-        txt_to_docx_single_file(txt_path, f"{output_name}.docx")
+
+        result = to_docx_path(output_path)
+        txt_to_docx_single_file(txt_path, result)
     else:
+
+        result = output_path
         # Large file: split and convert
-        os.makedirs(output_name, exist_ok=True)
+        os.makedirs(output_path, exist_ok=True)
         with tempfile.TemporaryDirectory() as tmp_dir:
             print(f"Splitting TXT into chunks in temporary dir: {tmp_dir}")
             chunk_files = split_txt_file(txt_path, tmp_dir)
 
             # Use modular function
-            convert_chunks_to_docx(chunk_files, output_name, max_files_per_dir)
+            convert_chunks_to_docx(chunk_files, output_path, max_files_per_dir)
 
-            print(f"All chunks converted. DOCX files are in subfolders of {output_name}/")
+            print(f"All chunks converted. DOCX files are in subfolders of {output_path}/")
+
+    return result
 
 

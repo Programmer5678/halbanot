@@ -8,5 +8,5 @@ def decode(input_path: str, output_path: str):
 
     decode_file_from_base64(input_path_decoded , output_path)
 
-decode("s_file.txt.zip.b64.docx", "s_file.txt.zip")
+# decode("s_file.txt.zip.b64.docx", "s_file.txt.zip")
 
