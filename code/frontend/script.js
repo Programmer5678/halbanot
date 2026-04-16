@@ -39,10 +39,38 @@ function get_request_func(button_value){
 
 }
 
+function set_result_header(button_value){
+
+    const resultHeader = document.getElementById("result-header");
+
+    switch (button_value) {
+        case "encode":
+            resultHeader.textContent = "Encode result: \n";
+            break;
+        case "decode":
+            resultHeader.textContent = "Decode result: \n";
+            break;
+        default:
+            alert("Submit button value should be encode or decode");
+    }
+
+}
+
+async function set_response(response) {
+
+    document.getElementById("response_code").innerText = response.status
+    document.getElementById("response_success").innerText = response.ok ? "SUCCESS" : "FAIL"
+
+    const result_str = JSON.stringify( await response.json() );
+    document.getElementById("response_json").innerText = result_str;
+}
+
 async function submit_handler(e) {
     e.preventDefault();
 
     const data = new FormData(e.target);
+    set_result_header(e.submitter?.value);
+
     const request_func = get_request_func(e.submitter?.value);
 
     const response = await request_func(
@@ -50,15 +78,74 @@ async function submit_handler(e) {
         data.get("output_path")
     );
 
-
-    document.getElementById("response_code").innerText = response.status
-    document.getElementById("response_success").innerText = response.ok ? "SUCCESS" : "FAIL"
-
-    const result_str = JSON.stringify( await response.json() );
-    document.getElementById("response_json").innerText = result_str;
+    set_response(response);
 
 }
 
 document
     .getElementById("halbanot-form")
     .addEventListener("submit", submit_handler);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//     </form>
+//
+//+    <div id="result">
+//+
+//+    <span id="result-header">
+//+    </span>
+//+
+//     <div id="response">
+//     <span id="response_json"></span>
+//     <span id="response_code"></span>
+//     <span id="response_success"></span>
+//     </div>
+//+    </div>
+//
+// </body>
+//
+//diff --git a/code/frontend/script.js b/code/frontend/script.js
+//index 83888d9..b29e853 100644
+//--- a/code/frontend/script.js
+//+++ b/code/frontend/script.js
+//@@ -47,10 +47,27 @@ async function set_response(){
+//     document.getElementById("response_json").innerText = result_str;
+// }
+//
+//+function set_result_header(){
+//+
+//+    switch (e.submitter?.value) {
+//+        case "encode":
+//+            document.getElementById("result-header").textContent = "Encode result: \n";
+//+            break;
+//+        case "decode":
+//+            document.getElementById("response-header").textContent = "Decode result: \n";
+//+            break;
+//+        default:
+//+            alert("Submit button value should be encode or decode");
+//+    }
+//+
+//+}
+//+
+// async function submit_handler(e) {
+//     e.preventDefault();
+//
+//     const data = new FormData(e.target);
+//+
+//+    set_result_header(e.submitter?.value);
+//     const request_func = get_request_func(e.submitter?.value);
+//
+//     const response = await request_func(
