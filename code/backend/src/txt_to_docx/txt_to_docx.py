@@ -59,7 +59,7 @@ def txt_to_docx_with_gc(txt_path, docx_path):
 def docx_file(output_base,  max_files_per_dir, file_index):
     dir_index = (file_index - 1) // max_files_per_dir
     dir_name = os.path.join(output_base, f"{dir_index:04d}")
-    docx_path = os.path.join(dir_name, f"{i:04d}.docx")
+    docx_path = os.path.join(dir_name, f"{file_index:04d}.docx")
 
     return dir_name, docx_path
  
