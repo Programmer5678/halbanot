@@ -2,6 +2,7 @@ from src.zip import unzip
 from src.base64decode.base64decode import decode_file_from_base64
 from src.docx_to_txt.docx_to_txt import docxs_to_txt
 from src.encode.input_validate import validate_parent_dir, validate_exists,validate_abs_path
+from .create_temp_path import create_temp_path
 
 def validate_input(input_path, output_path):
     validate_abs_path(input_path)
@@ -14,10 +15,10 @@ def decode(input_path: str, output_path: str):
 
     validate_input(input_path, output_path)
 
-    input_path_decoded = "/tmp/docx_decoded"
+    input_path_decoded = create_temp_path("docx_decoded")
     docxs_to_txt(input_path, input_path_decoded )
 
-    base64_decoded = "/tmp/base64_decoded"
+    base64_decoded = create_temp_path("base64_decoded")
     decode_file_from_base64(input_path_decoded , base64_decoded)
 
     unzip(base64_decoded, output_path)

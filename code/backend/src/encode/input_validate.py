@@ -9,6 +9,10 @@ def validate_is_file(path):
     if not os.path.isfile(path):
         raise InputValidationDE(f"{path} isnt file")
 
+def validate_is_dir(path):
+    if not os.path.isdir(path):
+        raise InputValidationDE(f"{path} isnt dir")
+
 def validate_abs_path(path: str) -> None:
     if not os.path.isabs(path):
         raise InputValidationDE(f"Path is not absolute: {path}")

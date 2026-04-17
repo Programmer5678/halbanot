@@ -66,6 +66,7 @@ async function set_response(response) {
 }
 
 async function submit_handler(e) {
+
     e.preventDefault();
 
     const data = new FormData(e.target);
